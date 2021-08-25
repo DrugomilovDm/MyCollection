@@ -1,3 +1,4 @@
 {
-  "jwtSecret": ""
+  "jwtSecret": "drugomilov course project",
+  "host": "https://hidden-journey-20357.herokuapp.com/"
 }
