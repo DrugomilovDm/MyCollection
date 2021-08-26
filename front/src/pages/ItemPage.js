@@ -9,7 +9,7 @@ import styles from "../ReactTags.module.scss";
 
 export const ItemPage = () => {
     const {request}= useHttp()
-    const {userId,token}=useContext(AuthContext)
+    const {userId,token,userRole}=useContext(AuthContext)
     const [item,setItem]=useState()
     const [likesNumber,setLikesNumber]=useState(0)
     const [like,setLike]=useState('')
@@ -66,7 +66,7 @@ export const ItemPage = () => {
             </Card>
         <div>
         <h1 className='m-5'>{item.name}</h1>
-            {userId===item.userId? <div className={styles.ReactTags}>
+            {userId===item.userId||userRole==="ADMIN"? <div className={styles.ReactTags}>
                 <ReactTags tags={tags}
                               suggestions={allTags}
                               handleDelete={delTagHandler}

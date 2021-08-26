@@ -8,7 +8,7 @@ import {CreateCollection} from "./modals/CreateCollection";
 export const Collection = ({collection,md,xs,lg,sm}) => {
     const [changeColVisible,setChangeColVisible]=useState(false)
     const history=useHistory()
-    const {token,setAlert,userId}=useContext(AuthContext)
+    const {token,setAlert,userId,userRole}=useContext(AuthContext)
     const {request} =useHttp()
     const delHandler = async () => {
         try {
@@ -22,7 +22,7 @@ export const Collection = ({collection,md,xs,lg,sm}) => {
         <Col md={md} lg={lg} sm={sm} xs={xs}  className="mt-3 mx-3" >
             <Card style={{width:150,cursor:'pointer'}} border={"light"}>
                 <div className="imgCont">
-                    {userId===collection.userId? <div>
+                    {userId===collection.userId||userRole==="ADMIN"? <div>
                         <div onClick={delHandler} className="remove">&times;</div>
                     <div onClick={()=>setChangeColVisible(true)} className="edit">&#x270E;</div>
                         </div>

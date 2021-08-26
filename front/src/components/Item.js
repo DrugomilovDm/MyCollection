@@ -7,7 +7,7 @@ import {CreateItem} from "./modals/CreateItem";
 
 export const Item = ({item}) => {
     const [changeItemVisible,setChangeItemVisible]=useState(false)
-    const {userId,token,setAlert }=useContext(AuthContext)
+    const {userId,token,setAlert,userRole }=useContext(AuthContext)
     const {request}=useHttp()
     const history=useHistory()
     const delHandler = async () => {
@@ -22,7 +22,7 @@ export const Item = ({item}) => {
         <Col md={3} lg={2} sm={5} xl={2} xs={5} className="mt-3 mx-3" >
             <Card style={{width:150,cursor:'pointer'}} border={"light"}>
                 <div className="imgCont">
-                    {userId===item.userId? <div>
+                    {userId===item.userId||userRole==="ADMIN"? <div>
                             <div onClick={delHandler}  className="remove">&times;</div>
                             <div onClick={()=>setChangeItemVisible(true)} className="edit">&#x270E;</div>
                         </div>

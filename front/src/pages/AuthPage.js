@@ -17,7 +17,7 @@ export const AuthPage = () => {
     const loginHandler = async () => {
         try {
             const data = await request('/api/auth/login', 'POST', { ...form })
-            login(data.token, data.userID)
+            login(data.token, data.userID,data.role)
         } catch (e) { setAlert(e.message) }
     }
 

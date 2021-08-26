@@ -7,7 +7,8 @@ import { MyCollectionsPage} from "./pages/MyCollectionsPage";
 import {CollectionPage} from "./pages/CollectionPage";
 import {ItemPage} from "./pages/ItemPage";
 import {SearchPage} from "./pages/SearchPage";
-export const useRoutes = (isAuthenticated=true) => {
+import {AdminPage} from "./pages/AdminPage";
+export const useRoutes = (isAuthenticated) => {
     if (!isAuthenticated) {
         return (
             <Switch>
@@ -35,6 +36,9 @@ export const useRoutes = (isAuthenticated=true) => {
     }
         return (
             <Switch>
+                <Route path="/Admin">
+                    <AdminPage/>
+                </Route>
                 <Route path="/Search/:value" exact>
                     <SearchPage/>
                 </Route>

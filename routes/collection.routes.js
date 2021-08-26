@@ -2,9 +2,6 @@ const {Router} = require('express')
 const router = Router()
 const {Collection, Item,Tag,Like} = require('../models/models')
 const auth = require('../middleware/auth.middleware')
-const {cloudinary} = require('../utils/cloudinary')
-const path = require("path");
-const fs = require("fs");
 const {imgUpload} = require("../utils/imgUpload");
 router.post("/addCol", auth, async (req, res) => {
     try {
@@ -62,11 +59,12 @@ router.get("/getMyCol", auth, async (req, res) => {
 
 router.delete('/delCol', auth, async (req, res) => {
     try {
-        const {id} = req.body;
-        const col = await Collection.findOne({where: {id, userId: req.user.userId},include:Item})
+        const {id} = req.body
+        const col =(req.user.role==="ADMIN")?await Collection.findOne({where: {id},include:Item}):
+            await Collection.findOne({where: {id, userId: req.user.userId},include:Item});
         await col.items.forEach((item)=>{Tag.destroy({where:{itemId:item.id}});Like.destroy({where:{itemId:item.id}})})
-        await Item.destroy({where: {collectionId: id}})
-        await Collection.destroy({where: {id: id}})
+        await Item.destroy({where: {collectionId: col.id}})
+        await Collection.destroy({where: {id: col.id}})
         res.status(200).json({message: "Коллекция удалена"})
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так'})
@@ -79,10 +77,10 @@ router.post("/changeCol", auth, async (req, res) => {
         if (req.files) {
             const {img} = req.files
             const uploadedResponse= await imgUpload(img)
-            await Collection.update({img: uploadedResponse.url, title, category, shortDesc, userId: req.user.userId},{where:{id:id}})
+            await Collection.update({img: uploadedResponse.url, title, category, shortDesc},{where:{id:id}})
             return res.status(201).json({message: 'Данные коллекции обновлены'})
         }
-        await Collection.update({title, category, shortDesc, userId: req.user.userId},{where:{id:id}})
+        await Collection.update({title, category, shortDesc},{where:{id:id}})
         res.status(201).json({message: 'Данные коллекции обновлены'})
     } catch (e) {
         console.log(e)

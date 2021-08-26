@@ -36,7 +36,6 @@ router.post('/login',[
     check('password','Введите пароль').exists()
 ],async (req,res)=>{
     try {
-        console.log(req.body);
         const errors =validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({
@@ -54,11 +53,11 @@ router.post('/login',[
             return  res.status(400).json({message:'Неверный пароль'})
         }
         const token=jwt.sign(
-            {userId:user.id},
+            {userId:user.id,role:user.role},
             config.get('jwtSecret'),
             {expiresIn:'24h'}
         )
-        res.json({token, userID:user.id})
+        res.json({token, userID:user.id,role:user.role})
     }catch (e){
         res.status(500).json({message:'Что-то пошло не так'})
     }

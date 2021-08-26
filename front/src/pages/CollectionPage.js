@@ -9,7 +9,7 @@ import {useParams} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
 
 export const CollectionPage =()=>{
-    const {alert,userId}=useContext(AuthContext)
+    const {alert,userId,userRole}=useContext(AuthContext)
     const [addItemVisible,setAddItemVisible]=useState(false)
     const {request}= useHttp()
     const [collection,setCollection]=useState()
@@ -28,7 +28,7 @@ export const CollectionPage =()=>{
             <Alert message={alert}/>
             <h1 className="text-center">{collection.name}</h1>
             <Card><ReactMarkdown>{collection.shortDesc}</ReactMarkdown></Card>
-            {(collection.userId===userId)?<div>
+            {(collection.userId===userId||userRole==="ADMIN")?<div>
             <Button variant="outline-dark" className="m-3" onClick={()=>setAddItemVisible(true)}>add item</Button>
             </div>:<div></div>
             }

@@ -2,9 +2,6 @@ const {Router}=require('express')
 const  router = Router()
 const {Item,Collection, Tag,Like}=require('../models/models')
 const auth =require('../middleware/auth.middleware')
-const path = require("path");
-const {cloudinary} = require("../utils/cloudinary");
-const fs = require("fs");
 const {imgUpload} = require("../utils/imgUpload");
 const sequelize=require('sequelize')
 
@@ -12,14 +9,14 @@ router.post("/addItem",auth, async (req,res)=>{
     try {
         const {name, tags,collectionId} = req.body
         const col= await Collection.findOne({where:{id:collectionId}})
-        if(col.userId===req.user.userId){
+        if(col.userId===req.user.userId||req.user.role==="ADMIN"){
             if(req.files){
         const {img}=req.files
         const uploadedResponse= await imgUpload(img)
-        await Item.create({img:uploadedResponse.url,name,tags,collectionId,userId:req.user.userId})
+        await Item.create({img:uploadedResponse.url,name,tags,collectionId,userId:col.userId})
         return  res.status(201).json({message:'Item создан'})
             }
-        await Item.create({name,tags,collectionId,userId:req.user.userId})
+        await Item.create({name,tags,collectionId,userId:col.userId})
         return  res.status(201).json({message:'Item создан'})
         }
         res.status(400).json({message:'Нет доступа'})
@@ -60,10 +57,13 @@ router.get("/getItem", async (req,res)=>{
 router.delete('/delItem',auth,async (req, res) => {
     try {
         const { id } = req.body;
+        const item=Item.findOne({where:{id,userId:req.user.userId}})
+        if(item||req.user.role==="ADMIN"){
         await Tag.destroy({where:{itemId:id}})
         await Like.destroy({where:{itemId:id}})
-        await Item.destroy({where:{id,userId:req.user.userId}})
-        res.status(200).json({message:"Item удален"})
+        await Item.destroy({where:{id}})
+         return res.status(200).json({message:"Item удален"})}
+        res.json({message:'Нет доступа'})
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }

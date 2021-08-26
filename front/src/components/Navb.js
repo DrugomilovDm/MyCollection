@@ -24,6 +24,7 @@ export const Navb =()=>{
                 <Navbar.Brand href="/">Collector</Navbar.Brand>
                 {auth.isAuthenticated ?
                     <Nav className="right">
+                        {auth.userRole==="ADMIN"?<Nav.Link href="/Admin">Admin panel</Nav.Link>:<div></div>}
                         <Nav.Link href="/MyCol">My collections</Nav.Link>
                         <input style={{height:40}} onKeyPress={keyPressHandler} onChange={(event)=>setValue(event.target.value)} className="mx-3" type="text" placeholder="search"/>
                         <Nav.Link onClick={logoutHandler} href="/">Logout</Nav.Link>
