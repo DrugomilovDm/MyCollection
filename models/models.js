@@ -27,11 +27,17 @@ const Item=sequelize.define('item',{
 const Like=sequelize.define('like',{
     id:{allowNull:false, autoIncrement:true, primaryKey:true, type:INTEGER},
 })
+
 const Tag=sequelize.define('tag',{
     id:{type:STRING,allowNull:false,primaryKey:true},
     text:{type:STRING,allowNull:false}
 })
 
+const Comment=sequelize.define('comment',{
+    id:{allowNull:false, autoIncrement:true, primaryKey:true, type:INTEGER},
+    userName:{type:STRING,allowNull:false},
+    commentText:{type:STRING,allowNull:false}
+})
 
 User.hasMany(Collection)
 Collection.belongsTo(User)
@@ -45,5 +51,7 @@ Item.hasMany(Like)
 Like.belongsTo(Item)
 Item.hasMany(Tag)
 Tag.belongsTo(Item)
+Item.hasMany(Comment)
+Comment.belongsTo(Item)
 
-module.exports={User,Collection,Item,Like,Tag}
+module.exports={User,Collection,Item,Like,Tag,Comment}

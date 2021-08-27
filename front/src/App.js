@@ -1,10 +1,8 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { useRoutes } from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/AuthContext";
-import "materialize-css"
 import {Navb} from "./components/Navb";
 import {Spinner} from "react-bootstrap";
 

@@ -53,7 +53,7 @@ router.post('/login',[
             return  res.status(400).json({message:'Неверный пароль'})
         }
         const token=jwt.sign(
-            {userId:user.id,role:user.role},
+            {userId:user.id,role:user.role,name:user.name},
             config.get('jwtSecret'),
             {expiresIn:'24h'}
         )

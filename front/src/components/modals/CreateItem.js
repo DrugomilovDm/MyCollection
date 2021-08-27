@@ -45,10 +45,8 @@ export const CreateItem = ({show,onHide,type,path,itemId}) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onHide} >
-                    Close
-                </Button>
-                <Button onClick={handleClick} >{type} item</Button>
+                <Button variant="outline-dark" onClick={onHide}>Close</Button>
+                <Button variant="outline-dark" onClick={handleClick}>{type} item</Button>
             </Modal.Footer>
         </Modal>
     );

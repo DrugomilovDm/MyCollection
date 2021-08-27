@@ -6,6 +6,7 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import {AuthContext} from "../context/AuthContext";
 import {Tags} from "../components/Tags";
 import styles from "../ReactTags.module.scss";
+import {Comments} from "../components/Comments";
 
 export const ItemPage = () => {
     const {request}= useHttp()
@@ -77,6 +78,10 @@ export const ItemPage = () => {
             </div>:<Tags tags={tags}/>}
         </div>
     </div>
+            <div className="m-5">
+                <h2 className="m-5">Comments</h2>
+                <Comments/>
+            </div>
     </div>
     );
 };

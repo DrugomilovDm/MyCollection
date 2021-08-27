@@ -32,14 +32,14 @@ export const RegPage =()=>{
                             <Card.Header>
                             </Card.Header>
                             <Card.Body>
-                                <Form.Label className="textStyle2">Name</Form.Label>
-                                <Form.Control onChange={changeHandler} type="name" id="name" name="name" className="" placeholder="Name" />
-                                <Form.Label className="textStyle2">Email Address</Form.Label>
-                                <Form.Control onChange={changeHandler} type="email" id="email" name="email" className="" placeholder="Example@email.com" />
-                                <Form.Label className="textStyle2">Password</Form.Label>
-                                <Form.Control onChange={changeHandler} type="password" id="password" name="password" className="" placeholder="Password" />
-                                <Button onClick={registerHandler} disabled={loading} className="my-3">Confirm</Button>
-                                <Button href="/Auth" disabled={loading} className="mx-2" >Sign in</Button>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control onChange={changeHandler} type="name" id="name" name="name" placeholder="Name" />
+                                <Form.Label>Email Address</Form.Label>
+                                <Form.Control onChange={changeHandler} type="email" id="email" name="email"  placeholder="Example@email.com" />
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control onChange={changeHandler} type="password" id="password" name="password"  placeholder="Password" />
+                                <Button variant="outline-dark" onClick={registerHandler} disabled={loading} className="my-3">Confirm</Button>
+                                <Button variant="outline-dark" href="/Auth" disabled={loading} className="mx-2" >Sign in</Button>
                             </Card.Body>
                         </Card>
                     </Form>

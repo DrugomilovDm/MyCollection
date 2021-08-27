@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Col, Card, Image, Dropdown} from 'react-bootstrap'
+import {Col, Card, Image} from 'react-bootstrap'
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/AuthContext";

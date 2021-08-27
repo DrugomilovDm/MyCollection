@@ -16,6 +16,7 @@ app.use('/api/item',require('./routes/item.routes'))
 app.use('/api/tag',require('./routes/tag.routes'))
 app.use('/api/like',require('./routes/like.routes'))
 app.use('/api/users',require('./routes/users.routes'))
+app.use('/api/comments',require('./routes/comments.routes'))
 
 if(process.env.NODE_ENV==='production'){
     app.use(express.static(path.join(__dirname,'front/build')))

@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import {Button, Form, Card, Container, Row, Col} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
 import { Alert } from '../components/Alert';

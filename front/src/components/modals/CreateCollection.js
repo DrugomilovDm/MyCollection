@@ -57,10 +57,10 @@ export const CreateCollection = ({show,onHide,type,path,id}) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onHide} >
+                <Button variant="outline-dark" onClick={onHide} >
                     Close
                 </Button>
-                <Button onClick={handleClick} >{type} collection</Button>
+                <Button variant="outline-dark" onClick={handleClick} >{type} collection</Button>
             </Modal.Footer>
         </Modal>
     );
