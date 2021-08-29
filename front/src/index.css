@@ -1,87 +1,94 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-.drop-area{
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border:3px dashed black;
+.drop-area {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px dashed black;
 }
 
-.imgCont{
-  position: relative;
-}
-.imgCont:hover .remove{
-  opacity: 1;
-}
-.imgCont:hover .edit{
-  opacity: 1;
-}
-.edit{
-  width:20px;
-  height: 20px;
-  position: absolute;
-  right: 25px;
-  top: 0px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor:pointer;
-  opacity: 0;
-  transition: opacity .22s;
-}
-.remove{
-  width:20px;
-  height: 20px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor:pointer;
-  opacity: 0;
-  background-color: darkgray;
-  transition: opacity .22s;
+.imgCont {
+    position: relative;
 }
 
-.likeCont{
-  position:relative;
-  height: 60px;
-}
-.like{
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top:0;
-  left: 0;
-  cursor:pointer;
-}
-.likeNumber{
-  position: absolute;
-  font-size: 30px;
-  top:0;
-  left:80px;
-}
-.pointer{
-  cursor:pointer;
+.imgCont:hover .remove {
+    opacity: 1;
 }
 
-.authRow{
+.imgCont:hover .edit {
+    opacity: 1;
+}
+
+.edit {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 25px;
+    top: 0px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .22s;
+}
+
+.remove {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    background-color: darkgray;
+    transition: opacity .22s;
+}
+
+.likeCont {
+    position: relative;
+    height: 60px;
+}
+
+.like {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.likeNumber {
+    position: absolute;
+    font-size: 30px;
+    top: 0;
+    left: 80px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.authRow {
 
 }

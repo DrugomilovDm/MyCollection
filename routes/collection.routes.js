@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const router = Router()
-const {Collection, Item,Tag,Like} = require('../models/models')
+const {Collection, Item} = require('../models/models')
 const auth = require('../middleware/auth.middleware')
 const {imgUpload} = require("../utils/imgUpload");
 router.post("/addCol", auth, async (req, res) => {
@@ -12,7 +12,7 @@ router.post("/addCol", auth, async (req, res) => {
         }
         if (req.files) {
             const {img} = req.files
-            const uploadedResponse= await imgUpload(img)
+            const uploadedResponse = await imgUpload(img)
             await Collection.create({img: uploadedResponse.url, title, category, shortDesc, userId: req.user.userId})
             return res.status(201).json({message: 'Коллекция создана'})
         }
@@ -60,10 +60,8 @@ router.get("/getMyCol", auth, async (req, res) => {
 router.delete('/delCol', auth, async (req, res) => {
     try {
         const {id} = req.body
-        const col =(req.user.role==="ADMIN")?await Collection.findOne({where: {id},include:Item}):
-            await Collection.findOne({where: {id, userId: req.user.userId},include:Item});
-        await col.items.forEach((item)=>{Tag.destroy({where:{itemId:item.id}});Like.destroy({where:{itemId:item.id}})})
-        await Item.destroy({where: {collectionId: col.id}})
+        const col = (req.user.role === "ADMIN") ? await Collection.findOne({where: {id}}) :
+        await Collection.findOne({where: {id, userId: req.user.userId}})
         await Collection.destroy({where: {id: col.id}})
         res.status(200).json({message: "Коллекция удалена"})
     } catch (e) {
@@ -73,18 +71,29 @@ router.delete('/delCol', auth, async (req, res) => {
 
 router.post("/changeCol", auth, async (req, res) => {
     try {
-        const {title, category, shortDesc,id} = req.body
+        const {title, category, shortDesc, id} = req.body
         if (req.files) {
             const {img} = req.files
-            const uploadedResponse= await imgUpload(img)
-            await Collection.update({img: uploadedResponse.url, title, category, shortDesc},{where:{id:id}})
+            const uploadedResponse = await imgUpload(img)
+            await Collection.update({img: uploadedResponse.url, title, category, shortDesc}, {where: {id: id}})
             return res.status(201).json({message: 'Данные коллекции обновлены'})
         }
-        await Collection.update({title, category, shortDesc},{where:{id:id}})
+        await Collection.update({title, category, shortDesc}, {where: {id: id}})
         res.status(201).json({message: 'Данные коллекции обновлены'})
     } catch (e) {
         console.log(e)
     }
-
 })
+
+router.get("/getCategoryCol", async (req, res) => {
+    try {
+        const category = req.query.category
+        const cols = await Collection.findAll({where: {category: category}})
+        res.json(cols)
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+
 module.exports = router

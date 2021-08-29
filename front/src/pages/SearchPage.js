@@ -2,9 +2,9 @@ import React from 'react'
 import {SearchList} from "../components/SearchList";
 
 
-export const SearchPage=()=>{
+export const SearchPage = () => {
 
-    return(
+    return (
         <div>
             <SearchList/>
         </div>
