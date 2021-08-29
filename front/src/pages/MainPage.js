@@ -29,8 +29,7 @@ export const MainPage = () => {
                 <LastItems/>
             </Col>
             <Col md="2" className="d-flex justify-content-center flex-wrap"><h3 className="text-center my-3">Largest
-                collections</h3><CollectionList path={"/getLargestCols"}
-                                                className={"d-flex justify-content-center"}/></Col>
+                collections</h3><CollectionList path={"/getLargestCols"} className={"d-flex justify-content-center"}/></Col>
         </Row>
     )
 }

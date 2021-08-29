@@ -17,14 +17,16 @@ export const AuthPage = () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form})
             login(data.token, data.userID, data.role)
+            setAlert(data.message)
         } catch (e) {
             setAlert(e.message)
         }
     }
 
     return (
-        <Row>
+        <>
             <Alert message={alert}/>
+        <Row className="mt-5">
             <Col md={{span: 6, offset: 3}} xs={{span: 12, offset: 0}}>
                 <Container>
                     <Form>
@@ -46,5 +48,6 @@ export const AuthPage = () => {
                 </Container>
             </Col>
         </Row>
+        </>
     )
 }

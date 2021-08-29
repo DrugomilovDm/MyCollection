@@ -14,12 +14,12 @@ router.post("/addItem", auth, async (req, res) => {
                 const {img} = req.files
                 const uploadedResponse = await imgUpload(img)
                 await Item.create({img: uploadedResponse.url, name, tags, collectionId, userId: col.userId})
-                return res.status(201).json({message: 'Item создан'})
+                return res.status(201).json({message: 'Item created'})
             }
             await Item.create({name, tags, collectionId, userId: col.userId})
-            return res.status(201).json({message: 'Item создан'})
+            return res.status(201).json({message: 'Item created'})
         }
-        res.status(400).json({message: 'Нет доступа'})
+        res.status(400).json({message: 'No access'})
     } catch (e) {
         console.log(e)
     }
@@ -73,11 +73,11 @@ router.delete('/delItem', auth, async (req, res) => {
         const item = Item.findOne({where: {id, userId: req.user.userId}})
         if (item || req.user.role === "ADMIN") {
             await Item.destroy({where: {id}})
-            return res.status(200).json({message: "Item удален"})
+            return res.status(200).json({message: "Item deleted"})
         }
-        res.json({message: 'Нет доступа'})
+        res.json({message:'No access'})
     } catch (e) {
-        res.status(500).json({message: 'Что-то пошло не так'})
+        res.status(500).json({message:'Something went wrong'})
     }
 })
 router.post("/changeItem", auth, async (req, res) => {
@@ -87,10 +87,10 @@ router.post("/changeItem", auth, async (req, res) => {
             const {img} = req.files
             const uploadedResponse = await imgUpload(img)
             await Item.update({img: uploadedResponse.url, name}, {where: {id: id}})
-            return res.status(201).json({message: 'Данные Item обновлены'})
+            return res.status(201).json({message: 'Item data updated'})
         }
         await Item.update({name: name}, {where: {id: id}})
-        res.status(201).json({message: 'Данные Item обновлены'})
+        res.status(201).json({message: 'Item data updated'})
     } catch (e) {
         console.log(e)
     }

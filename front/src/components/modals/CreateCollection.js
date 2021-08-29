@@ -14,6 +14,7 @@ export const CreateCollection = ({show, onHide, type, path, id}) => {
     }
     const addCollectionHandler = async () => {
         try {
+            if(form.title===''||form.category===''||form.shortDesc===''){setAlert('fields name, category, short description are required');return}
             const formData = new FormData()
             formData.append('title', form.title)
             formData.append('category', form.category)
@@ -57,7 +58,7 @@ export const CreateCollection = ({show, onHide, type, path, id}) => {
                         <option>Cars</option>
                         <option>Stamps</option>
                     </Form.Select>
-                    <Form.Label>Collection image</Form.Label>
+                    <Form.Label className="mt-3">Collection image</Form.Label>
                     <Drag setFile={setFile}/>
                     <Form.Group className="mb-3">
                         <Form.Label>Short description</Form.Label>

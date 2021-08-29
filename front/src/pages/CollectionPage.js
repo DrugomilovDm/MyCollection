@@ -26,7 +26,7 @@ export const CollectionPage = () => {
     return (
         <div>
             <Alert message={alert}/>
-            <h1 className="text-center">{collection.name}</h1>
+            <h1 className="text-center">{collection.title}</h1>
             <Card><ReactMarkdown>{collection.shortDesc}</ReactMarkdown></Card>
             {(collection.userId === userId || userRole === "ADMIN") ? <div>
                 <Button variant="outline-dark" className="m-3" onClick={() => setAddItemVisible(true)}>add item</Button>

@@ -8,7 +8,7 @@ router.post('/addTag', async (req, res) => {
         const {text, itemId} = req.body
         const id = uuidv4()
         await Tag.create({id, text, itemId})
-        res.status(201).json({message: 'Tag добавлен'})
+        res.status(201).json({message: 'Tag added'})
     } catch (e) {
         console.log(e)
     }
@@ -29,7 +29,7 @@ router.post('/delTag', async (req, res) => {
     try {
         const {text, itemId} = req.body
         await Tag.destroy({where: {text, itemId}})
-        res.status(201).json({message: 'Tag удален'})
+        res.status(201).json({message: 'Tag removed'})
     } catch (e) {
         console.log(e)
     }

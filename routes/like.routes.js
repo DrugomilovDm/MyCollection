@@ -8,7 +8,7 @@ router.post('/addLike', auth, async (req, res) => {
         const {itemId} = req.body
         console.log('userId:' + req.user.userId)
         await Like.create({itemId, userId: req.user.userId})
-        res.status(201).json({message: 'Like добавлен'})
+        res.status(201).json({message:'Like added'})
     } catch (e) {
         res.json({message: e})
     }
@@ -18,7 +18,7 @@ router.delete('/delLike', auth, async (req, res) => {
     try {
         const {itemId} = req.body
         await Like.destroy({where: {itemId, userId: req.user.userId}})
-        res.status(201).json({message: 'Like убран'})
+        res.status(201).json({message: 'Like removed'})
     } catch (e) {
         res.json({message: e})
     }

@@ -64,6 +64,7 @@ export const ItemPage = () => {
         return (<Spinner animation={"border"}/>)
     return (<>
             <h1 className='m-3 text-center'>{item.name}</h1>
+            <hr/>
             <Row>
                 <Col md={3}>
                     <Card className="m-5" style={{width: 150}} border={"light"}>

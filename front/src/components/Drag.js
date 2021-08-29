@@ -16,7 +16,7 @@ export const Drag = ({setFile}) => {
         setFile(...e.dataTransfer.files)
     }
     return (
-        <Card className="mt-3 drop-area" onDrop={e => onDropHandler(e)}>
+        <Card className="drop-area" onDrop={e => onDropHandler(e)}>
             {drag
                 ? <div className="border-5 h-100 w-100 text-center "
                        onDragStart={e => dragStartHandler(e)}
@@ -24,7 +24,7 @@ export const Drag = ({setFile}) => {
                        onDragOver={e => dragStartHandler(e)}
                     //onDrop={e=>onDropHandler(e)}
                 >Drop the file</div>
-                : <div
+                : <div className="h-100 w-100 text-center"
                     onDragStart={e => dragStartHandler(e)}
                     onDragLeave={e => dragLeaveHandler(e)}
                     onDragOver={e => dragStartHandler(e)}

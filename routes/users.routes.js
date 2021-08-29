@@ -9,7 +9,7 @@ router.get('/getUsers', auth, async (req, res) => {
             const users = await User.findAll()
             return res.json(users)
         }
-        res.json({message: 'Нет доступа'})
+        res.json({message:'No access'})
     } catch (e) {
         console.log(e)
     }
@@ -19,9 +19,9 @@ router.delete('/delUsers', auth, async (req, res) => {
         if (req.user.role === "ADMIN") {
             const {ids} = req.body
             await User.destroy({where: {id: ids}})
-            return res.json({message: 'Пользователь удален'})
+            return res.json({message: 'User deleted'})
         }
-        res.json({message: 'Нет доступа'})
+        res.json({message: 'No access'})
     } catch (e) {
         console.log(e)
     }
@@ -32,9 +32,9 @@ router.post('/addAdmin', auth, async (req, res) => {
         if (req.user.role === "ADMIN") {
             const {ids} = req.body
             await User.update({role: "ADMIN"}, {where: {id: ids}})
-            return res.json({message: 'Роль пользователя изменилась'})
+            return res.json({message: 'User role has changed'})
         }
-        res.json({message: 'Нет доступа'})
+        res.json({message: 'No access'})
     } catch (e) {
         console.log(e)
     }
@@ -44,9 +44,9 @@ router.post('/deleteAdmin', auth, async (req, res) => {
         if (req.user.role === "ADMIN") {
             const {ids} = req.body
             await User.update({role: "USER"}, {where: {id: ids}})
-            return res.json({message: 'Роль пользователя изменилась'})
+            return res.json({message: 'User role has changed'})
         }
-        res.json({message: 'Нет доступа'})
+        res.json({message: 'No access'})
     } catch (e) {
         console.log(e)
     }

@@ -8,16 +8,16 @@ router.post("/addCol", auth, async (req, res) => {
         const {title, category, shortDesc} = req.body
         const col = await Collection.findOne({where: {title}})
         if (!!col) {
-            return res.status(400).json({message: 'Коллекция с таким названием уже существует'})
+            return res.status(400).json({message: 'A collection with the same name already exists'})
         }
         if (req.files) {
             const {img} = req.files
             const uploadedResponse = await imgUpload(img)
             await Collection.create({img: uploadedResponse.url, title, category, shortDesc, userId: req.user.userId})
-            return res.status(201).json({message: 'Коллекция создана'})
+            return res.status(201).json({message: 'Collection created'})
         }
         await Collection.create({title, category, shortDesc, userId: req.user.userId})
-        res.status(201).json({message: 'Коллекция создана'})
+        res.status(201).json({message: 'Collection created'})
     } catch (e) {
         console.log(e)
     }
@@ -63,9 +63,9 @@ router.delete('/delCol', auth, async (req, res) => {
         const col = (req.user.role === "ADMIN") ? await Collection.findOne({where: {id}}) :
         await Collection.findOne({where: {id, userId: req.user.userId}})
         await Collection.destroy({where: {id: col.id}})
-        res.status(200).json({message: "Коллекция удалена"})
+        res.status(200).json({message: "Collection deleted"})
     } catch (e) {
-        res.status(500).json({message: 'Что-то пошло не так'})
+        res.status(500).json({message:'Something went wrong'})
     }
 })
 
@@ -76,10 +76,10 @@ router.post("/changeCol", auth, async (req, res) => {
             const {img} = req.files
             const uploadedResponse = await imgUpload(img)
             await Collection.update({img: uploadedResponse.url, title, category, shortDesc}, {where: {id: id}})
-            return res.status(201).json({message: 'Данные коллекции обновлены'})
+            return res.status(201).json({message: 'Collection data updated'})
         }
         await Collection.update({title, category, shortDesc}, {where: {id: id}})
-        res.status(201).json({message: 'Данные коллекции обновлены'})
+        res.status(201).json({message: 'Collection data updated'})
     } catch (e) {
         console.log(e)
     }

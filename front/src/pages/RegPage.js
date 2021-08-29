@@ -23,14 +23,12 @@ export const RegPage = () => {
     }
 
     return (
-        <Row>
+        <Row className="mt-5">
             <Alert message={alert}/>
             <Col md={{span: 6, offset: 3}} xs={{span: 12, offset: 0}}>
-                <Container className=" ">
+                <Container>
                     <Form>
                         <Card className="cardStyle">
-                            <Card.Header>
-                            </Card.Header>
                             <Card.Body>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control onChange={changeHandler} type="name" id="name" name="name"

@@ -16,6 +16,7 @@ export const CreateItem = ({show, onHide, type, path, itemId}) => {
     }
     const addItemHandler = async () => {
         try {
+            if(form.name===''){setAlert('field name are required');return}
             const formData = new FormData()
             formData.append('name', form.name)
             !!itemId ? formData.append('id', itemId) : formData.append('collectionId', id)
